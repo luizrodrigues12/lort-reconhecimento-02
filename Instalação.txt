@@ -1,0 +1,32 @@
+Baixe o python 3.11.9
+
+1 - Ative o ambiente virtual rodando os seguintes comandos
+ -> cd [pasta onde está o facehive]
+ -> py -3.11 -m venv venv
+ -> venv\Scripts\activate
+
+2 - Instale as dependências
+ Se for GPU NVIDIA + CUDA 11.8:
+  -> python -m pip install --no-user --force-reinstall opencv-python numpy==1.26.4 insightface onnxruntime-gpu==1.16.3 xxhash rawpy psutil pynvml
+ Se for apenas CPU:
+  -> python -m pip install --no-user --force-reinstall opencv-python numpy==1.26.4 insightface onnxruntime xxhash rawpy psutil pynvml
+
+3 - Iniciar o software
+ -> venv\Scripts\activate
+ -> Rode o comando "python main.py"
+
+4 - Criar executável
+ -> python -m pip install pyinstaller
+ -> python -m PyInstaller --onedir --name FaceHive ^
+  --collect-all numpy ^
+  --collect-all scipy ^
+  --collect-all sklearn ^
+  --collect-all scikit-image ^
+  --collect-all insightface ^
+  --collect-all albumentations ^
+  --collect-all PIL ^
+  --hidden-import cv2 ^
+  --hidden-import xxhash ^
+  --hidden-import psutil ^
+  --hidden-import onnxruntime ^
+  main.py
